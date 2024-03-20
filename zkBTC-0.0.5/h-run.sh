@@ -69,4 +69,4 @@ else
 fi
 
 #echo "dotnet ./SoliditySHA3Miner.dll $CUSTOM_USER_CONFIG 2>&1 | tee $CUSTOM_LOG_BASENAME.log"
-dotnet ./SoliditySHA3Miner.dll $(< ${CUSTOM_CONFIG_FILENAME}.param) 2>&1 | tee $CUSTOM_LOG_BASENAME.log
+dotnet ./_zkBitcoinMiner.dll $(< ${CUSTOM_CONFIG_FILENAME}.param) 2>&1 | tee $CUSTOM_LOG_BASENAME.log

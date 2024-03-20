@@ -9,22 +9,32 @@ conf=$(jq -n \
   --arg isLogFile false \
   --arg minerJsonAPI "http://127.0.0.1:4078" \
   --arg minerCcminerAPI "127.0.0.1:4068" \
-  --arg web3api "https://mainnet.infura.io/ANueYSYQTstCr2mFJjPE" \
-  --arg contractAddress "0xB6eD7644C69416d67B522e20bC294A9a9B405B31" \
-  --arg abiFile "0xBTC.abi" \
-  --arg overrideMaxTarget "0x40000000000000000000000000000000000000000000000000000000000" \
+  --arg web3api "https://mainnet.era.zksync.io" \
+  --arg contractAddress "0x366d17aDB24A7654DbE82e79F85F9Cb03c03cD0D" \
+  --arg abiFile "zkBTC.abi" \
+  --arg overrideMaxTarget "0x0" \
   --arg customDifficulty 0 \
   --arg submitStale false \
-  --arg maxScanRetry 5 \
+  --arg maxScanRetry 3 \
   --arg pauseOnFailedScans 3 \
-  --arg networkUpdateInterval 15000 \
-  --arg hashrateUpdateInterval 30000 \
+  --arg networkUpdateInterval 50000 \
+  --arg hashrateUpdateInterval 60000 \
   --arg kingAddress "" \
-  --arg minerAddress "${CUSTOM_TEMPLATE}" \
-  --arg primaryPool "${CUSTOM_URL}" \
+  --arg minerAddress "${CUSTOM_WALLET_ADDRESS}" \
+  --arg primaryPool "${CUSTOM_PRIMARY_POOL_URL}" \
   --arg secondaryPool "" \
-  --arg privateKey "" \
-  --arg gasToMine 5.0 \
+  --arg MaxZKBTCperMint 500.0 \
+  --arg MinZKBTCperMint 250.0 \
+  --arg HowManyBlocksAWAYFromAdjustmentToSendMinimumZKBTC 200.0 \
+  --arg privateKey "${CUSTOM_WALLET_PRIVATE_KEY}" \
+  --arg gasToMine 3.2 \
+  --arg gasLimit 551704624 \
+  --arg gasApiURL "" \
+  --arg gasApiPath "$.result.SafeGasPrice" \
+  --arg gasApiMultiplier 1.0 \
+  --arg gasApiOffset 0.1 \
+  --arg gasApiMax 0.5 \
+  --arg allowCPU false \
   --arg cpuMode false \
   --argjson cpuDevices [] \
   --arg allowIntel true \
@@ -33,7 +43,7 @@ conf=$(jq -n \
   --argjson amdDevices [] \
   --arg allowCUDA true \
   --argjson cudaDevices [] \
-'{$isLogFile, $minerJsonAPI, $minerCcminerAPI, $web3api, $contractAddress, $abiFile, $overrideMaxTarget, $customDifficulty, $submitStale, $maxScanRetry, $pauseOnFailedScans, $networkUpdateInterval, $hashrateUpdateInterval, $kingAddress, $minerAddress, $primaryPool, $secondaryPool, $privateKey, $gasToMine, $cpuMode, $cpuDevices, $allowIntel, $intelDevices, $allowAMD, $amdDevices, $allowCUDA, $cudaDevices}')
+'{$isLogFile, $minerJsonAPI, $minerCcminerAPI, $web3api, $contractAddress, $abiFile, $overrideMaxTarget, $customDifficulty, $submitStale, $maxScanRetry, $pauseOnFailedScans, $networkUpdateInterval, $hashrateUpdateInterval, $kingAddress, $minerAddress, $primaryPool, $secondaryPool, $MaxZKBTCperMint, $MinZKBTCperMint, $HowManyBlocksAWAYFromAdjustmentToSendMinimumZKBTC, $privateKey, $gasToMine, $gasLimit, $gasApiURL, $gasApiPath, $gasApiMultiplier, $gasApiOffset, $gasApiMax, $allowCPU, $cpuMode, $cpuDevices, $allowIntel, $intelDevices, $allowAMD, $amdDevices, $allowCUDA, $cudaDevices}')
 
 #replace tpl values in whole file
 [[ -z $EWAL && -z $ZWAL && -z $DWAL ]] && echo -e "${RED}No WAL address is set${NOCOLOR}"
